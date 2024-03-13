@@ -1,8 +1,8 @@
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import styles from "./Current.module.css";
 import { useState } from "react";
 import "regenerator-runtime/runtime";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -14,6 +14,8 @@ function Current({ array, setarr }) {
     const h = { task: item, isComp: false };
     setarr((item) => [...item, h]);
   }
+
+  const navigate = useNavigate();
 
   const commands = [
     {
@@ -42,9 +44,9 @@ function Current({ array, setarr }) {
   let redirect = "";
   if (redirectUrl) {
     if (pages.includes(redirectUrl)) {
-      redirect = <Redirect to={urls[redirectUrl]} />;
+      redirect = navigate({ redirectUrl });
     } else {
-      redirect = <p> could not find page</p>;
+      redirect = <p> could not find page :{redirectUrl}</p>;
     }
   }
 
