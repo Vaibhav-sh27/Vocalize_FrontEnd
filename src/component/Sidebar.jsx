@@ -3,6 +3,7 @@ import styles from "./Sidebar.module.css";
 import NewTask from "./NewTask";
 import Completed from "./Completed";
 import Current from "./Current";
+import { useState } from "react";
 // import { Outlet } from "react-router-dom";
 
 const arr = [
@@ -33,6 +34,7 @@ const arr = [
 ];
 
 function Slidebar() {
+  const [array, setarr] = useState(arr);
   return (
     <div className={styles.sidebar}>
       {/* <Outlet /> */}
@@ -40,7 +42,7 @@ function Slidebar() {
         <NewTask />
         <Completed arr={arr} />
       </div>
-      <Current arr={arr} />
+      <Current array={array} setarr={setarr} />
     </div>
   );
 }
