@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import styles from "./Current.module.css";
 import { useState } from "react";
 import "regenerator-runtime/runtime";
+import { Redirect } from "react-router-dom";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -19,9 +20,33 @@ function Current({ array, setarr }) {
       command: ["add *"],
       callback: (item) => add(item),
     },
+    {
+      command: ["go to *", "open *"],
+      callback: (redirectPage) => setRedirectUrl(redirectPage),
+    },
   ];
 
   const { transcript } = useSpeechRecognition({ commands });
+  const [redirectUrl, setRedirectUrl] = useState("");
+
+  const pages = ["home", "login"];
+  const urls = {
+    home: "/",
+    login: "/login",
+  };
+
+  if (!SpeechRecognition.browserSupportsSpeechRecognition) {
+    return null;
+  }
+
+  let redirect = "";
+  if (redirectUrl) {
+    if (pages.includes(redirectUrl)) {
+      redirect = <Redirect to={urls[redirectUrl]} />;
+    } else {
+      redirect = <p> could not find page</p>;
+    }
+  }
 
   return (
     <div className={styles.main}>
