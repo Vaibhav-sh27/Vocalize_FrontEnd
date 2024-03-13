@@ -47,7 +47,7 @@ function Slidebar() {
       {/* <Outlet /> */}
       <div className={styles.left}>
         <NewTask array={array} setarr={setarr}/>
-        <Completed arr={array} />
+        <Completed arr={array} setarr={setarr}/>
       </div>
       <Current array={array} setarr={setarr} />
     </div>
