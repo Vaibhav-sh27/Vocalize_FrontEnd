@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import styles from "./NewTask.module.css";
+import { v4 as uuidv4 } from 'uuid';
 function NewTask({array,setarr}) {
   let [inp, setInp] = useState('');
   function add(item) {
     console.log(item);
     if(inp){
-      const h = { task: item, isComp: false };
+      const h = {id: uuidv4(), task: item, isComp: false };
       setarr((item) => [...item, h]);
       setInp("");
     }
