@@ -4,38 +4,38 @@ import NewTask from "./NewTask";
 import Completed from "./Completed";
 import Current from "./Current";
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 // import { Outlet } from "react-router-dom";
 
 const arr = [
   {
-    id: uuidv4(), 
+    id: uuidv4(),
     task: "Work to do",
     isComp: true,
   },
   {
-    id: uuidv4(), 
+    id: uuidv4(),
     task: "Gym to go",
     isComp: false,
   },
   {
-    id: uuidv4(), 
-    task: "sleeping 8 hrs",
+    id: uuidv4(),
+    task: "sleeping 8 hours",
     isComp: false,
   },
   {
-    id: uuidv4(), 
-    task: "study 10hrs",
+    id: uuidv4(),
+    task: "study 10 hours",
     isComp: true,
   },
   {
-    id: uuidv4(), 
-    task: "study 10hrs",
+    id: uuidv4(),
+    task: "study 10 hours",
     isComp: false,
   },
   {
-    id: uuidv4(), 
-    task: "gaming 10hrs",
+    id: uuidv4(),
+    task: "gaming 10 hours",
     isComp: true,
   },
 ];
@@ -46,8 +46,8 @@ function Slidebar() {
     <div className={styles.sidebar}>
       {/* <Outlet /> */}
       <div className={styles.left}>
-        <NewTask array={array} setarr={setarr}/>
-        <Completed arr={array} setarr={setarr}/>
+        <NewTask array={array} setarr={setarr} />
+        <Completed arr={array} setarr={setarr} />
       </div>
       <Current array={array} setarr={setarr} />
     </div>

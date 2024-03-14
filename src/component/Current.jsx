@@ -16,6 +16,33 @@ function Current({ array, setarr }) {
     setarr((item) => [...item, h]);
   }
 
+  function handledel(id) {
+    let arr = array.filter((item, index) => {
+      if (item.id !== id) {
+        return item;
+      }
+    });
+    //let arr = array;
+    console.log(arr);
+    setarr(arr);
+    //  navigate("/app");
+  }
+
+  function remove(item) {
+    console.log(item);
+    let st = item.toUpperCase();
+    let uid = array.filter((k) => {
+      let del;
+      let str = k.task.toUpperCase();
+      if (st == str) {
+        del = k.id;
+      }
+      return del;
+    });
+    console.log(uid[0].id);
+    handledel(uid[0].id);
+  }
+
   const navigate = useNavigate();
 
   const commands = [
@@ -26,6 +53,10 @@ function Current({ array, setarr }) {
     {
       command: ["go to *", "open *"],
       callback: (redirectPage) => setRedirectUrl(redirectPage),
+    },
+    {
+      command: ["skip *", "remove *", "delete *"],
+      callback: (item) => remove(item),
     },
   ];
 
@@ -93,6 +124,7 @@ function List({ comp, setarr, array }) {
       if (item.id !== id) {
         return item;
       }
+      t;
     });
     //let arr = array;
     console.log(arr);
