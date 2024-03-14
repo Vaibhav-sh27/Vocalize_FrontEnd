@@ -124,7 +124,6 @@ function List({ comp, setarr, array }) {
       if (item.id !== id) {
         return item;
       }
-      t;
     });
     //let arr = array;
     console.log(arr);
