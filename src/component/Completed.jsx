@@ -1,6 +1,7 @@
 import styles from "./Completed.module.css";
 import { Context } from '../Context';
 import { useContext } from "react";
+import axios from "axios";
 
 function Completed() {
   const {array, setarr} = useContext(Context);
@@ -17,9 +18,10 @@ function Completed() {
 function List({ comp}) {
   const {array, setarr} = useContext(Context);
 
-  function handledel(id) {
+  function handledel(_id) {
+    axios.delete(`${window.API_URL}/todo/${_id}`);
     let arr = array.filter((item, index) => {
-      if (item.id !== id) {
+      if (item._id !== _id) {
         return item;
       }
     });
@@ -33,7 +35,7 @@ function List({ comp}) {
       <h1>{comp.task}</h1>
       <button
           onClick={() => {
-            handledel(comp.id);
+            handledel(comp._id);
           }}
         >
           ❌

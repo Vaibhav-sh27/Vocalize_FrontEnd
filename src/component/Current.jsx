@@ -8,20 +8,25 @@ import { Context } from '../Context';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import axios from "axios";
 
 function Current() {
   // const [g, setg] = useState(arr);
   const {array, setarr} = useContext(Context);
 
-  function add(item) {
-    console.log(item);
-    const h = { id: uuidv4(), task: item, isComp: false };
-    setarr((item) => [...item, h]);
+  async function add(item) {
+    let regex = /[.]/g;
+    item = item.replace(regex, '');
+    const h = { task: item, isComp: false };
+      let res = await axios.post(`${window.API_URL}/addtodo`, h)
+      console.log(res.data);
+      setarr((item) => [...item, res.data.data]);
   }
 
-  function handledel(id) {
+  function handledel(_id) {
+    axios.delete(`${window.API_URL}/todo/${_id}`);
     let arr = array.filter((item, index) => {
-      if (item.id !== id) {
+      if (item._id !== _id) {
         return item;
       }
     });
@@ -33,17 +38,20 @@ function Current() {
 
   function remove(item) {
     console.log(item);
+    let regex = /[.]/g;
+    item = item.replace(regex, '');
+    console.log(item);
     let st = item.toUpperCase();
     let uid = array.filter((k) => {
       let del;
       let str = k.task.toUpperCase();
       if (st == str) {
-        del = k.id;
+        del = k._id;
       }
       return del;
     });
-    console.log(uid[0].id);
-    handledel(uid[0].id);
+    console.log(uid[0]._id);
+    handledel(uid[0]._id);
   }
 
   const navigate = useNavigate();
@@ -110,9 +118,10 @@ function List({ comp}) {
   let navigate = useNavigate();
   const {array, setarr} = useContext(Context);
 
-  function handleComp(id) {
+  function handleComp(_id) {
+    axios.patch(`${window.API_URL}/todo/${_id}`, {isComp: true})
     let arr = array.map((item, index) => {
-      if (item.id == id) {
+      if (item._id == _id) {
         item.isComp = true;
       }
       return item;
@@ -123,9 +132,10 @@ function List({ comp}) {
     //  navigate("/app");
   }
 
-  function handledel(id) {
+  function handledel(_id) {
+    axios.delete(`${window.API_URL}/todo/${_id}`);
     let arr = array.filter((item, index) => {
-      if (item.id !== id) {
+      if (item._id !== _id) {
         return item;
       }
     });
@@ -141,14 +151,14 @@ function List({ comp}) {
       <div>
         <button
           onClick={() => {
-            handleComp(comp.id);
+            handleComp(comp._id);
           }}
         >
           ✅
         </button>
         <button
           onClick={() => {
-            handledel(comp.id);
+            handledel(comp._id);
           }}
         >
           ❌

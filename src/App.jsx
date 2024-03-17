@@ -7,44 +7,61 @@ import AppLayout from "./pages/AppLayout";
 import Speech from "./component/Speech";
 import { Context } from "./Context";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { Redirect } from "react-router-dom";
+import axios from 'axios';
 
 const arr = [
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     task: "Work to do",
     isComp: true,
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     task: "Gym to go",
     isComp: false,
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     task: "sleeping 8 hours",
     isComp: false,
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     task: "study 10 hours",
     isComp: true,
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     task: "study 10 hours",
     isComp: false,
   },
   {
-    id: uuidv4(),
+    _id: uuidv4(),
     task: "gaming 10 hours",
     isComp: true,
   },
 ];
 
 function App() {
-  const [array, setarr] = useState(arr);
+  const [array, setarr] = useState([]);
+  console.log();
+  useEffect( () => {
+    async function getData(){
+      await axios
+      .get(`${window.API_URL}/todos`)
+      .then((res) => {
+        setarr(res.data)
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+    getData();
+  }, [])
+
   return (
     <BrowserRouter>
       <Context.Provider value={{ array, setarr }}>
