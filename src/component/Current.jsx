@@ -1,15 +1,18 @@
 import { Link, redirect, useNavigate } from "react-router-dom";
 import styles from "./Current.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "regenerator-runtime/runtime";
 import { v4 as uuidv4 } from "uuid";
 // import { Redirect } from "react-router-dom";
+import { Context } from '../Context';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-function Current({ array, setarr }) {
+function Current() {
   // const [g, setg] = useState(arr);
+  const {array, setarr} = useContext(Context);
+
   function add(item) {
     console.log(item);
     const h = { id: uuidv4(), task: item, isComp: false };
@@ -95,7 +98,7 @@ function Current({ array, setarr }) {
         {array.map(
           (comp, i) =>
             !comp.isComp && (
-              <List key={i} comp={comp} setarr={setarr} array={array} />
+              <List key={i} comp={comp} />
             )
         )}
       </ul>
@@ -103,8 +106,9 @@ function Current({ array, setarr }) {
   );
 }
 
-function List({ comp, setarr, array }) {
+function List({ comp}) {
   let navigate = useNavigate();
+  const {array, setarr} = useContext(Context);
 
   function handleComp(id) {
     let arr = array.map((item, index) => {

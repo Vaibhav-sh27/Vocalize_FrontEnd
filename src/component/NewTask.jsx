@@ -1,8 +1,12 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styles from "./NewTask.module.css";
 import { v4 as uuidv4 } from 'uuid';
-function NewTask({array,setarr}) {
+import { Context } from '../Context';
+function NewTask() {
   let [inp, setInp] = useState('');
+  const {array, setarr} = useContext(Context);
+
+  
   function add(item) {
     console.log(item);
     if(inp){

@@ -1,17 +1,22 @@
 import styles from "./Completed.module.css";
+import { Context } from '../Context';
+import { useContext } from "react";
 
-function Completed({ arr, setarr }) {
+function Completed() {
+  const {array, setarr} = useContext(Context);
   return (
     <div>
       <h1 className={styles.main}>Completed Task</h1>
       <ul className={styles.List}>
-        {arr.map((comp, i) => comp.isComp && <List key={i} comp={comp} setarr={setarr} array={arr} />)}
+        {array.map((comp, i) => comp.isComp && <List key={i} comp={comp}  />)}
       </ul>
     </div>
   );
 }
 
-function List({ comp, setarr, array }) {
+function List({ comp}) {
+  const {array, setarr} = useContext(Context);
+
   function handledel(id) {
     let arr = array.filter((item, index) => {
       if (item.id !== id) {
