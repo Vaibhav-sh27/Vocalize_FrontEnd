@@ -11,39 +11,6 @@ import { useEffect, useState } from "react";
 // import { Redirect } from "react-router-dom";
 import axios from 'axios';
 
-const arr = [
-  {
-    _id: uuidv4(),
-    task: "Work to do",
-    isComp: true,
-  },
-  {
-    _id: uuidv4(),
-    task: "Gym to go",
-    isComp: false,
-  },
-  {
-    _id: uuidv4(),
-    task: "sleeping 8 hours",
-    isComp: false,
-  },
-  {
-    _id: uuidv4(),
-    task: "study 10 hours",
-    isComp: true,
-  },
-  {
-    _id: uuidv4(),
-    task: "study 10 hours",
-    isComp: false,
-  },
-  {
-    _id: uuidv4(),
-    task: "gaming 10 hours",
-    isComp: true,
-  },
-];
-
 function App() {
   const [array, setarr] = useState([]);
   console.log();
