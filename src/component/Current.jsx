@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import "regenerator-runtime/runtime";
 import { v4 as uuidv4 } from "uuid";
 // import { Redirect } from "react-router-dom";
-import { Context } from '../Context';
+import { Context } from "../Context";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -12,15 +12,15 @@ import axios from "axios";
 
 function Current() {
   // const [g, setg] = useState(arr);
-  const {array, setarr} = useContext(Context);
+  const { array, setarr } = useContext(Context);
 
   async function add(item) {
     let regex = /[.]/g;
-    item = item.replace(regex, '');
+    item = item.replace(regex, "");
     const h = { task: item, isComp: false };
-      let res = await axios.post(`${window.API_URL}/addtodo`, h)
-      console.log(res.data);
-      setarr((item) => [...item, res.data.data]);
+    let res = await axios.post(`${window.API_URL}/addtodo`, h);
+    console.log(res.data);
+    setarr((item) => [...item, res.data.data]);
   }
 
   function handledel(_id) {
@@ -39,7 +39,7 @@ function Current() {
   function remove(item) {
     console.log(item);
     let regex = /[.]/g;
-    item = item.replace(regex, '');
+    item = item.replace(regex, "");
     console.log(item);
     let st = item.toUpperCase();
     let uid = array.filter((k) => {
@@ -103,23 +103,18 @@ function Current() {
       <input className={styles.inp} type="text" value={transcript} />
       <h1 className={styles.head}>Current Task</h1>
       <ul className={styles.List}>
-        {array.map(
-          (comp, i) =>
-            !comp.isComp && (
-              <List key={i} comp={comp} />
-            )
-        )}
+        {array.map((comp, i) => !comp.isComp && <List key={i} comp={comp} />)}
       </ul>
     </div>
   );
 }
 
-function List({ comp}) {
+function List({ comp }) {
   let navigate = useNavigate();
-  const {array, setarr} = useContext(Context);
+  const { array, setarr } = useContext(Context);
 
   function handleComp(_id) {
-    axios.patch(`${window.API_URL}/todo/${_id}`, {isComp: true})
+    axios.patch(`${window.API_URL}/todo/${_id}`, { isComp: true });
     let arr = array.map((item, index) => {
       if (item._id == _id) {
         item.isComp = true;
