@@ -15,10 +15,11 @@ export default function Login() {
   let emailInputRef= useRef();
   let passInputRef = useRef();
 
-  const {setShow, setAlert, setCurrUser} = useContext(Context);
-  const {setToken} = useAuth();
+  const {setShow, setAlert, setarr} = useContext(Context);
+  const {setToken, setUser, currUser} = useAuth();
 
- 
+
+
 
   async function handleLogin(e) {
     e.preventDefault();
@@ -36,10 +37,21 @@ export default function Login() {
         password:pass,
       });
       console.log(res);
-      setCurrUser(res.data.data.userdata);
+       setUser(res.data.data.userdata);
       setToken(res.data.data.token);
-      
+
+      await axios
+      .get(`${import.meta.env.VITE_API_URL}/todo/${res.data.data.userdata._id}/todos`)
+      .then((res) => {
+        setarr(res.data)
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+   
       navigate("/app");
+      
     } catch (e) {
       console.log(e);
       setAlert(e.response.data)
@@ -56,10 +68,11 @@ export default function Login() {
       <form className={styles.form}>
       <h1>Sign In</h1>
         <div className={styles.row}>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email" name="email">Email address</label>
           <input
             type="email"
             id="email"
+            name="email"
             ref={emailInputRef}
             placeholder="jack@example.com"
           />

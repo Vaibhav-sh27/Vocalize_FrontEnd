@@ -3,16 +3,17 @@ import styles from "./NewTask.module.css";
 import { v4 as uuidv4 } from 'uuid';
 import { Context } from '../contexts/Context';
 import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
 function NewTask() {
   let [inp, setInp] = useState('');
   const {array, setarr} = useContext(Context);
+  const {currUser} = useAuth();
 
   
   async function add(item) {
-    console.log(item);
     if(inp){
       const h = { task: item, isComp: false };
-      let res = await axios.post(`${window.API_URL}/addtodo`, h)
+      let res = await axios.post(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/addtodo`, h)
       console.log(res.data);
       setarr((item) => [...item, res.data.data]);
       setInp("");

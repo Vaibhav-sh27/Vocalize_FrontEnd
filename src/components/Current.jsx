@@ -9,22 +9,24 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
 
 function Current() {
   // const [g, setg] = useState(arr);
   const { array, setarr } = useContext(Context);
+  const {currUser} = useAuth();
 
   async function add(item) {
     let regex = /[.]/g;
     item = item.replace(regex, "");
     const h = { task: item, isComp: false };
-    let res = await axios.post(`${window.API_URL}/addtodo`, h);
+    let res = await axios.post(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/addtodo`, h)
     console.log(res.data);
     setarr((item) => [...item, res.data.data]);
   }
 
   function handledel(_id) {
-    axios.delete(`${window.API_URL}/todo/${_id}`);
+    axios.delete(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/${_id}`);
     let arr = array.filter((item, index) => {
       if (item._id !== _id) {
         return item;
@@ -100,10 +102,10 @@ function Current() {
         Start Recording
         {/* </Link> */}
       </button>
-      <input className={styles.inp} type="text" value={transcript} />
+      <input className={styles.inp} type="text" onChange={()=>{}} value={transcript} />
       <h1 className={styles.head}>Current Task</h1>
       <ul className={styles.List}>
-        {array.map((comp, i) => !comp.isComp && <List key={i} comp={comp} />)}
+        {array.map((comp, i) => !comp.isComp &&  <List key={i} comp={comp} />)}
       </ul>
     </div>
   );
@@ -112,9 +114,10 @@ function Current() {
 function List({ comp }) {
   let navigate = useNavigate();
   const { array, setarr } = useContext(Context);
+  const {currUser} = useAuth();
 
   function handleComp(_id) {
-    axios.patch(`${window.API_URL}/todo/${_id}`, { isComp: true });
+    axios.patch(`${import.meta.env.VITE_API_URL}/todo/${_id}`, { isComp: true });
     let arr = array.map((item, index) => {
       if (item._id == _id) {
         item.isComp = true;
@@ -128,7 +131,7 @@ function List({ comp }) {
   }
 
   function handledel(_id) {
-    axios.delete(`${window.API_URL}/todo/${_id}`);
+    axios.delete(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/${_id}`);
     let arr = array.filter((item, index) => {
       if (item._id !== _id) {
         return item;

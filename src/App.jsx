@@ -19,7 +19,7 @@ import Logout from "./pages/Logout.jsx";
 function App() {
 
   const {setarr}= useContext(Context);
-  const {token}= useAuth();
+  const {token, currUser}= useAuth();
 
   let ProtectedRoute=({children})=>{
     if(!token){
@@ -30,8 +30,9 @@ function App() {
 
   useEffect( () => {
     async function getData(){
-      await axios
-      .get(`${import.meta.env.VITE_API_URL}/todos`)
+      if(currUser){
+        await axios
+      .get(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/todos`)
       .then((res) => {
         setarr(res.data)
         console.log(res);
@@ -39,6 +40,7 @@ function App() {
       .catch((error) => {
         console.log(error)
       })
+      }
     }
     getData();
   }, [])

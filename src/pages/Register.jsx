@@ -60,30 +60,33 @@ export default function Register() {
       <form className={styles.form}>
       <h1>Create Account</h1>
         <div className={styles.row}>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email" name="email">Email address</label>
           <input
             type="email"
             id="email"
+            name="email"
             ref={emailInputRef}
             placeholder="jack@example.com"
             required
           />
         </div>
         <div className={styles.row}>
-        <label htmlFor="text">Name</label>
+        <label htmlFor="text" name="name">Name</label>
           <input
             type="text"
             id="name"
+            name="name"
             ref={nameInputRef}
             placeholder="Jack"
             required
           />
         </div>
         <div className={styles.row}>
-        <label htmlFor="text">Username</label>
+        <label htmlFor="text" name="username">Username</label>
           <input
             type="text"
             id="username" 
+            name = "username"
             ref={usernameInputRef}
             placeholder="jack123"
             required

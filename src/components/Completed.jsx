@@ -2,6 +2,7 @@ import styles from "./Completed.module.css";
 import { Context } from '../contexts/Context';
 import { useContext } from "react";
 import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
 
 function Completed() {
   const {array, setarr} = useContext(Context);
@@ -17,9 +18,9 @@ function Completed() {
 
 function List({ comp}) {
   const {array, setarr} = useContext(Context);
-
+  const {currUser} = useAuth();
   function handledel(_id) {
-    axios.delete(`${window.API_URL}/todo/${_id}`);
+    axios.delete(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/${_id}`);
     let arr = array.filter((item, index) => {
       if (item._id !== _id) {
         return item;
