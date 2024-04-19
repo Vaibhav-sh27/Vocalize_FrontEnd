@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styles from "./PageNav.module.css";
 import Logo from "./Logo";
+import { useAuth } from "../contexts/AuthContext";
 
 function PageNav() {
+  const {token} = useAuth();
   return (
     <nav className={styles.nav}>
       <Logo />
@@ -14,9 +16,12 @@ function PageNav() {
           <NavLink to="/command">Commands</NavLink>
         </li>
         <li>
+          {token? <NavLink to="/logout" className={styles.ctaLink} style={{backgroundColor:'red', color:'white'}}>
+            Logout
+          </NavLink> : 
           <NavLink to="/login" className={styles.ctaLink}>
             Login
-          </NavLink>
+          </NavLink>}
         </li>
       </ul>
     </nav>

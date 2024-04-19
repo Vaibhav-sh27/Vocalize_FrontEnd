@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import styles from "./NewTask.module.css";
 import { v4 as uuidv4 } from 'uuid';
-import { Context } from '../Context';
+import { Context } from '../contexts/Context';
 import axios from "axios";
 function NewTask() {
   let [inp, setInp] = useState('');

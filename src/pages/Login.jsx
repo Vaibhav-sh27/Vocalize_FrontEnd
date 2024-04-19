@@ -1,25 +1,67 @@
-import { useState } from "react";
+import { useContext, useRef, useState } from "react";
 // import PageNav from "../components/PageNav";
 import styles from "./Login.module.css";
-import Logo from "../component/Logo";
-import { Link } from "react-router-dom";
+import Logo from "../components/Logo";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from '../contexts/Context'; 
+import ModalAlert from '../components/Modal';
+import axios from 'axios'
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
-  const [email, setEmail] = useState("jack@example.com");
-  const [password, setPassword] = useState("qwerty");
+
+  let navigate = useNavigate();
+  let emailInputRef= useRef();
+  let passInputRef = useRef();
+
+  const {setShow, setAlert, setCurrUser} = useContext(Context);
+  const {setToken} = useAuth();
+
+ 
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    let email = emailInputRef.current.value;
+    let pass = passInputRef.current.value;
+    if(!(email && pass)){
+        setAlert("Please Enter Full Details!!!")
+        setShow(true);
+        return;
+    }
+
+    try {
+      let res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, {
+        email:email, 
+        password:pass,
+      });
+      console.log(res);
+      setCurrUser(res.data.data.userdata);
+      setToken(res.data.data.token);
+      
+      navigate("/app");
+    } catch (e) {
+      console.log(e);
+      setAlert(e.response.data)
+      setShow(true);
+      //alert(e.response.data)
+    }
+  }
 
   return (
     <main className={styles.login}>
+    
       <Logo />
+      <ModalAlert/>
       <form className={styles.form}>
+      <h1>Sign In</h1>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
           <input
             type="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            ref={emailInputRef}
+            placeholder="jack@example.com"
           />
         </div>
 
@@ -28,15 +70,19 @@ export default function Login() {
           <input
             type="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            ref={passInputRef}
+            placeholder="Password"
           />
         </div>
 
+        <div style={{display:'flex', justifyContent:'center'}}>
+          Not Registered? &nbsp; <Link to={'/register'} style={{color:'cyan'}}> Sign Up</Link>
+        </div>
+
         <div>
-          <Link to="/app">
-            <button>Login</button>
-          </Link>
+          <div style={{display:'flex', justifyContent:'center'}}>
+            <button style={{padding:' 7px 5rem', borderRadius:'8px'}} onClick={handleLogin}>Login</button>
+          </div>
         </div>
       </form>
     </main>

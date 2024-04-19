@@ -1,7 +1,8 @@
 // import Footer from "../component/Footer";
-import Logo from "../component/Logo";
-import ProfileTo from "../component/ProfileTo";
-import Sidebar from "../component/Sidebar";
+import { Link } from "react-router-dom";
+import Logo from "../components/Logo";
+import ProfileTo from "../components/ProfileTo";
+import Sidebar from "../components/Sidebar";
 import styles from "./AppLayout.module.css";
 function AppLayout() {
   return (

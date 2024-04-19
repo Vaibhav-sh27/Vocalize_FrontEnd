@@ -1,5 +1,5 @@
 import styles from "./Completed.module.css";
-import { Context } from '../Context';
+import { Context } from '../contexts/Context';
 import { useContext } from "react";
 import axios from "axios";
 

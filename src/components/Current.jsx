@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import "regenerator-runtime/runtime";
 import { v4 as uuidv4 } from "uuid";
 // import { Redirect } from "react-router-dom";
-import { Context } from "../Context";
+import { Context } from "../contexts/Context";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
