@@ -38,11 +38,11 @@ function Fav() {
     <>
       <main className={styles.homepage}>
         <PageNav />
-        <section>
+        <section style={{display:'flex', justifyContent:'center', flexDirection:'column', alignItems:'center', textAlign:'center'}}>
           <div className={styles.head}>
             {" "}
             <h1 className={styles.h1}>
-              &quot;Famous Personality TODO s&quot;
+              &quot; Famous Personality TODO's &quot;
               <br />
             </h1>
             <SearchPosts
@@ -56,7 +56,7 @@ function Fav() {
             ))}
           </div>
           <div className={styles.kk}>
-            <h2>Welcome to the Voice Recognition Todo List!</h2>
+            <h1>Welcome to the Voice Recognition Todo List!</h1>
             <Link to="/app" className="cta">
               Start Recording Now
             </Link>
@@ -74,6 +74,7 @@ function SearchPosts({ searchQuery, setSearchQuery }) {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search todo..."
+        style={{padding:'16px 12px'}}
       />
     </div>
   );

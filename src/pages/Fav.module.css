@@ -13,8 +13,8 @@
 }
 
 .sear {
-  font-size: 16px;
-  margin-top: 3rem;
+  font-size: 18px;
+  margin-top: 2rem;
   padding: 8px 12px;
   /* border: 1px solid #ffe8cc; */
   font-family: inherit;
@@ -48,11 +48,12 @@
 }
 .kk {
   margin: 7rem;
+  font-size: xx-large;
 }
 .ll {
   font-size: large;
   text-decoration: underline;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   color: white;
   width: 100%;
 }
@@ -62,11 +63,14 @@
   margin-right: 8rem;
   padding: 3rem;
   background-color: darkgray;
+  border-radius: 15px;
 }
 
 .tod {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 /* 
   .homepage section {
