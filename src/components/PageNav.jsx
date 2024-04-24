@@ -4,7 +4,7 @@ import Logo from "./Logo";
 import { useAuth } from "../contexts/AuthContext";
 
 function PageNav() {
-  const {token} = useAuth();
+  const { token } = useAuth();
   return (
     <nav className={styles.nav}>
       <Logo />
@@ -13,15 +13,22 @@ function PageNav() {
           <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/command">Commands</NavLink>
+          <NavLink to="/command">Fav ToDo</NavLink>
         </li>
         <li>
-          {token? <NavLink to="/logout" className={styles.ctaLink} style={{backgroundColor:'red', color:'white'}}>
-            Logout
-          </NavLink> : 
-          <NavLink to="/login" className={styles.ctaLink}>
-            Login
-          </NavLink>}
+          {token ? (
+            <NavLink
+              to="/logout"
+              className={styles.ctaLink}
+              style={{ backgroundColor: "red", color: "white" }}
+            >
+              Logout
+            </NavLink>
+          ) : (
+            <NavLink to="/login" className={styles.ctaLink}>
+              Login
+            </NavLink>
+          )}
         </li>
       </ul>
     </nav>
