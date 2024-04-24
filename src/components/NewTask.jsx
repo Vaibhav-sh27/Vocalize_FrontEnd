@@ -12,7 +12,7 @@ function NewTask() {
   
   async function add(item) {
     if(inp){
-      const h = { task: item, isComp: false };
+      const h = { task: item, isComp: false, owner: currUser.email };
       let res = await axios.post(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/addtodo`, h)
       console.log(res.data);
       setarr((item) => [...item, res.data.data]);
