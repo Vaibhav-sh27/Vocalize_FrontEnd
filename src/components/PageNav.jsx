@@ -13,7 +13,7 @@ function PageNav() {
           <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/command">Fav ToDo</NavLink>
+          <NavLink to="/fav">Fav ToDo</NavLink>
         </li>
         <li>
           {token ? (
