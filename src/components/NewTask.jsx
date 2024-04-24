@@ -6,13 +6,16 @@ import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 function NewTask() {
   let [inp, setInp] = useState('');
+  let dateRef = useRef();
   const {array, setarr} = useContext(Context);
   const {currUser} = useAuth();
 
   
   async function add(item) {
     if(inp){
-      const h = { task: item, isComp: false, owner: currUser.email };
+      let dateTime=dateRef.current.value;
+      dateTime=new Date(dateTime);
+      const h = { task: item, isComp: false, owner: currUser.email, dueDate: dateTime};
       let res = await axios.post(`${import.meta.env.VITE_API_URL}/todo/${currUser._id}/addtodo`, h)
       console.log(res.data);
       setarr((item) => [...item, res.data.data]);
@@ -25,7 +28,7 @@ function NewTask() {
       <div className={styles.row}>
         <label htmlFor="cityName">New Task</label>
         <input id="cityName" placeholder="Create a new Task" onChange={(e)=>{setInp(e.target.value)}} value={inp} />
-        {/* <input id="Time" placeholder="Time" type="time" /> */}
+        <input id="Time" placeholder="Time" type="datetime-local" ref={dateRef} />
         <button  className={styles.btn} onClick={()=>{add(inp)}}>ADD </button>
       </div>
     </div>
