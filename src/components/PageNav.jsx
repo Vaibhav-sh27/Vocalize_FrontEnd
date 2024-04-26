@@ -2,9 +2,12 @@ import { NavLink } from "react-router-dom";
 import styles from "./PageNav.module.css";
 import Logo from "./Logo";
 import { useAuth } from "../contexts/AuthContext";
+import { Context } from "../contexts/Context";
+import { useContext } from "react";
 
 function PageNav() {
-  const { token } = useAuth();
+  const { token, currUser } = useAuth();
+  const {setShow} = useContext(Context);
   return (
     <nav className={styles.nav}>
       <Logo />
@@ -13,7 +16,11 @@ function PageNav() {
           <NavLink to="/profile">Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/fav">Fav ToDo</NavLink>
+          {currUser ? (currUser.isSub? <NavLink to="/fav">Fav ToDo</NavLink> : 
+          <NavLink onClick={()=>{
+            setShow(true)
+          }}>Fav ToDo</NavLink>) :
+          <NavLink to="/fav">Fav ToDo</NavLink>}
         </li>
         <li>
           {token ? (
