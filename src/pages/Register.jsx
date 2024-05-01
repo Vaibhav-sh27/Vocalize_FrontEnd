@@ -40,15 +40,15 @@ export default function Register() {
         name: name,
         password:pass, 
       });
-      console.log(res);
-      //alert("User Registerd Successfully! Please Login");
-      setAlert("User Registerd Successfully! Please Sign In")
-      setShow(true);
       let res2 = await axios.post(`${import.meta.env.VITE_API_URL}/mail/welcome`, {
         email:email,
         name: name,
       });
+      console.log(res);
       console.log(res2);
+      //alert("User Registerd Successfully! Please Login");
+      setAlert("User Registerd Successfully! Please Sign In")
+      setShow(true);
       navigate("/login");
     } catch (e) {
       // alert(e.response.data)
