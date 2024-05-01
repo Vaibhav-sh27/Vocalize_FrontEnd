@@ -11,7 +11,7 @@ import {
     MDBModalFooter,
   } from 'mdb-react-ui-kit';
 import { Context } from '../contexts/Context';
-// import "./Modal.css"
+ import styles from "./ModalAlert.module.css"
 
 function ModalAlert() {
   const {show, setShow, alert} = useContext(Context);
@@ -23,7 +23,7 @@ function ModalAlert() {
     <>
 
 
-      <MDBModal open={show} onClose={handleClose} tabIndex='-1' >
+      <MDBModal open={show} onClose={handleClose} tabIndex='-1' className={styles.modal}>
         <MDBModalDialog style={{fontSize:'20px', color:'GrayText', padding:'20px'}}>
           <MDBModalContent style={{fontSize:'20px', padding:'10px'}}>
             <MDBModalHeader>
