@@ -163,7 +163,7 @@ function List({ comp }) {
             setShow(true);
           }}
         >
-          <img src="../../public/edit.png" alt="" srcset="" style={{height:'25px', width:'25px'}}/>
+          <img src="https://firebasestorage.googleapis.com/v0/b/vocalise-f04b7.appspot.com/o/edit.png?alt=media&token=7693a09c-cbea-49fb-aa6f-48bd98151e69" alt="" srcset="" style={{height:'25px', width:'25px'}}/>
         </button>
         <button
           onClick={() => {
