@@ -10,10 +10,11 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
+import UpdateModal from "./UpdateModal";
 
 function Current() {
   // const [g, setg] = useState(arr);
-  const { array, setarr } = useContext(Context);
+  const { array, setarr, setAlert, setShow } = useContext(Context);
   const {currUser} = useAuth();
 
   async function add(item) {
@@ -97,6 +98,7 @@ function Current() {
 
   return (
     <div className={styles.main}>
+    <UpdateModal/>
       <button onClick={SpeechRecognition.startListening} className={styles.btn}>
         {/* <Link className={styles.Link} to="/speech"> */}
         Start Recording
@@ -113,7 +115,7 @@ function Current() {
 
 function List({ comp }) {
   let navigate = useNavigate();
-  const { array, setarr } = useContext(Context);
+  const { array, setarr, setAlert, setShow } = useContext(Context);
   const {currUser} = useAuth();
 
   function handleComp(_id) {
@@ -153,6 +155,15 @@ function List({ comp }) {
           }}
         >
           ✅
+        </button>
+        <button
+          onClick={() => {
+            setAlert({id: comp._id,
+                      task: comp.task});
+            setShow(true);
+          }}
+        >
+          <img src="../../public/edit.png" alt="" srcset="" style={{height:'25px', width:'25px'}}/>
         </button>
         <button
           onClick={() => {

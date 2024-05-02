@@ -1,7 +1,7 @@
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import React, { useContext, useState } from 'react';
 import { MDBBtn, MDBModal, MDBModalDialog, MDBModalContent, MDBModalBody } from 'mdb-react-ui-kit';
-import './Modal.css'
+import styles from './Modal.module.css'
 import { Context } from '../contexts/Context';
 import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
@@ -69,7 +69,7 @@ export default function PayModal(e) {
   return (
     <div style={{width:'100vw'}}>
 
-      <MDBModal animationDirection='top' open={show} tabIndex='-1' onClose={() => setShow(false)} >
+      <MDBModal animationDirection='top' open={show} tabIndex='-1' onClose={() => setShow(false)} className={styles.modal} >
         <MDBModalDialog position='top' frame="true" style={{fontSize:'20px', color:'GrayText'}}>
           <MDBModalContent >
             <MDBModalBody className='py-1' style={{height:'80px', display:'flex', alignItems:'center', justifyContent:'center'}}>
